@@ -1,4 +1,4 @@
-import Main from "../components/Main"
+import Main from "../components/header/Main"
 import Head from "next/head"
 
 export default function Error() {

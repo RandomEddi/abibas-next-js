@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from '../styles/A.module.css'
+import styles from '../../styles/A.module.css'
 
 export default function A({children, href}) {
     return (
