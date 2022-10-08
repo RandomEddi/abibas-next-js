@@ -3,6 +3,11 @@ const initialState = {
     accountsList : [],
     currAccount: {},
     authorized: false,
+  },
+
+  shopList: {
+    itemsList: [],
+    cartList: []
   }
 }
 

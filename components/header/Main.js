@@ -7,34 +7,121 @@ import styles from '../../styles/A.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutAccount, loginAccount } from '../../actions/accountsAction'
 import { fetchAccounts } from '../../actions/accountsAction'
+import { setShopItems } from '../../actions/shopListAction'
 
 const Main = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const accountInfo = useSelector(state => state.accounts)
+  const accountInfo = useSelector((state) => state.accounts)
   const accountList = accountInfo.accountsList
   function getCookie(name) {
-    let matches = document.cookie.match(new RegExp(
-      "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
+    let matches = document.cookie.match(
+      new RegExp(
+        '(?:^|; )' +
+          name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
+          '=([^;]*)'
+      )
+    )
+    return matches ? decodeURIComponent(matches[1]) : undefined
   }
-  
+
   useEffect(() => {
-    dispatch(fetchAccounts())
+    if (!accountList.length) {
+      dispatch(fetchAccounts())
+
+    }
+    const test = [
+      {
+        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
+        price: 17999,
+        title: 'Мужские кроссовки adidas Originals Ozweego',
+        category: ['man', 'shoes'],
+        avaibleSize: ['39', '40', '41', '42'],
+        id: '1'
+      },
+      {
+        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
+        price: 17999,
+        title: 'Мужские кроссовки adidas Originals Ozweego',
+        category: ['man', 'shoes'],
+        avaibleSize: ['39', '40', '41', '42'],
+        id: '2'
+      },
+      {
+        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
+        price: 17999,
+        title: 'Мужские кроссовки adidas Originals Ozweego',
+        category: ['man', 'shoes'],
+        avaibleSize: ['39', '40', '41', '42'],
+        id: '3'
+      },
+      {
+        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
+        price: 17999,
+        title: 'Мужские кроссовки adidas Originals Ozweego',
+        category: ['man', 'shoes'],
+        avaibleSize: ['39', '40', '41', '42'],
+        id: '4'
+      },
+      {
+        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
+        price: 17999,
+        title: 'Мужские кроссовки adidas Originals Ozweego',
+        category: ['man', 'shoes'],
+        avaibleSize: ['39', '40', '41', '42'],
+        id: '5'
+      },
+      {
+        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
+        price: 17999,
+        title: 'Мужские кроссовки adidas Originals Ozweego',
+        category: ['woman', 'shoes'],
+        avaibleSize: ['39', '40', '41', '42'],
+        id: '6'
+      },
+      {
+        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
+        price: 17999,
+        title: 'Мужские кроссовки adidas Originals Ozweego',
+        category: ['woman', 'shoes'],
+        avaibleSize: ['39', '40', '41', '42'],
+        id: '7'
+      },
+      {
+        imgUrl: 'https://static.street-beat.ru/upload/resize_cache/iblock/034/500_500_1/0346fdafff73114de2016f9b0da2deee.jpg',
+        price: 14999,
+        title: 'Женские кроссовки adidas Originals Astir',
+        category: ['woman', 'shoes'],
+        avaibleSize: ['38', '41', '42'],
+        id: '8'
+      },
+      {
+        imgUrl: 'https://static.street-beat.ru/upload/resize_cache/iblock/bcb/500_500_1/bcb4256bf372825aaa1e5242bde7a8bf.jpg',
+        price: 10999,
+        title: 'Женская худи adidas Originals Graphic Hoodie',
+        category: ['woman'],
+        avaibleSize: ['38', '41', '42'],
+        id: '9'
+      },
+    ]
+    
+    dispatch(setShopItems(test))
   }, [])
 
-  useEffect(function() {
-    const accId = getCookie('user')
-    if (accId !== undefined) {
-      for (const acc of accountList) {
-        if (acc.id === accId) {
-          dispatch(loginAccount(acc))
-          break
-        } 
+  useEffect(
+    function () {
+      const accId = getCookie('user')
+      if (accId !== undefined) {
+        for (const acc of accountList) {
+          if (acc.id === accId) {
+            dispatch(loginAccount(acc))
+            break
+          }
+        }
       }
-    }
-  }, [accountList]);
+    },
+    [accountList]
+  )
 
   function menuOpenHandler() {
     document.querySelector('.nav-menu').classList.toggle('open')
@@ -55,15 +142,25 @@ const Main = (props) => {
   return (
     <>
       <Head>
-        <link rel="icon" href="/icon.jpg" />
+        <link rel='icon' href='/icon.jpg' />
       </Head>
       <div className='pop-up'>
         <nav>
-          <A href={'/men'}>MEN</A>
-          <A href={'/women'}>WOMEN</A>
+          <A href={'/man'}>MAN</A>
+          <A href={'/woman'}>WOMAN</A>
           <A href={'/shoes'}>SHOES</A>
-          {accountInfo.authorized && <A href='/cart'><div className='account-info'><span>{accountInfo.currAccount.email.split('@')[0]}</span></div></A>}
-          {accountInfo.authorized && <a className={styles.link} href='' onClick={logoutHandler}>LOGOUT</a>}
+          {accountInfo.authorized && (
+            <A href='/cart'>
+              <div className='account-info'>
+                <span>{accountInfo.currAccount.email.split('@')[0]}</span>
+              </div>
+            </A>
+          )}
+          {accountInfo.authorized && (
+            <a className={styles.link} href='' onClick={logoutHandler}>
+              LOGOUT
+            </a>
+          )}
           {!accountInfo.authorized && <A href={'/login'}>LOGIN</A>}
         </nav>
         <div className='close' onClick={menuCloseHandler}>
@@ -72,7 +169,7 @@ const Main = (props) => {
         </div>
       </div>
       <header className='header'>
-        <div className="logo">
+        <div className='logo'>
           <Link href={'/'}>
             <a>
               <img src='/logo.png'></img>
@@ -81,17 +178,28 @@ const Main = (props) => {
         </div>
         <nav className='navbar'>
           <div className='categories'>
-            <A href={'/men'}>MEN</A>
-            <A href={'/women'}>WOMEN</A>
+            <A href={'/man'}>MAN</A>
+            <A href={'/woman'}>WOMAN</A>
             <A href={'/shoes'}>SHOES</A>
           </div>
           <div className='management'>
-            {accountInfo.authorized && <A href='/cart'><div><span>&#128722;</span><span>{accountInfo.currAccount.email.split('@')[0]}</span></div></A>}
-            {accountInfo.authorized && <a className={styles.link} href='' onClick={logoutHandler}>LOGOUT</a>}
+            {accountInfo.authorized && (
+              <A href='/cart'>
+                <div>
+                  <span>&#128722;</span>
+                  <span>{accountInfo.currAccount.email.split('@')[0]}</span>
+                </div>
+              </A>
+            )}
+            {accountInfo.authorized && (
+              <a className={styles.link} href='' onClick={logoutHandler}>
+                LOGOUT
+              </a>
+            )}
             {!accountInfo.authorized && <A href={'/login'}>LOGIN</A>}
           </div>
         </nav>
-        <div className="nav-menu" onClick={menuOpenHandler}>
+        <div className='nav-menu' onClick={menuOpenHandler}>
           <span></span>
           <span></span>
           <span></span>
@@ -118,7 +226,7 @@ const Main = (props) => {
           }
 
           .navbar {
-            width:100%;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -128,9 +236,9 @@ const Main = (props) => {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            text-align:center;
+            text-align: center;
           }
-          
+
           .management div span:first-of-type {
             // padding-bottom: 3px;
           }
@@ -172,7 +280,7 @@ const Main = (props) => {
               height: 4px;
               width: 30px;
             }
-            
+
             .pop-up {
               position: fixed;
               top: 0;
@@ -180,7 +288,7 @@ const Main = (props) => {
               right: 0;
               z-index: 100;
               display: block;
-              background: rgba(0, 0, 0, .90);
+              background: rgba(0, 0, 0, 0.9);
               padding: 25px;
               transform: translateY(-100%);
               transition: all 1s;
@@ -230,7 +338,7 @@ const Main = (props) => {
           @media screen and (max-width: 814px) {
             .management div span:first-of-type {
               display: none;
-            } 
+            }
           }
 
           @media screen and (max-width: 260px) {
@@ -242,7 +350,6 @@ const Main = (props) => {
               width: 20px;
             }
           }
-
         `}
       </style>
     </>

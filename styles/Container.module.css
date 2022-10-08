@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  max-width: 1476px;
+  margin: 0 auto;
+  padding: 20px;
+  row-gap: 25px;
+  column-gap: 25px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: 1128px) {
+  .container {
+    max-width:  900px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    max-width:  calc(100% - 340px);
+  }
+}
+@media screen and (max-width: 560px) {
+  .container {
+    max-width:  340px;
+  }
+}
