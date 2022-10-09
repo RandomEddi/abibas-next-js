@@ -1,10 +1,12 @@
 import Link from "next/link"
+import React from "react"
+
 const ShopItem = (props) => {
   const {title, imgUrl, price, id} = props.props
   return (
     <>
     <div className="item">
-      <Link href={'item/' + [...id]}>
+      <Link href={'item/' + id}>
         <a className="shop-item">
           <img className="item-image" src={imgUrl} alt={title} />
           <span className="item-price">{price} rub</span>
@@ -17,7 +19,7 @@ const ShopItem = (props) => {
       {`
       .item {
         display: inline-block;
-        
+        width: 340px;
       }
 
       .shop-item {
@@ -49,4 +51,4 @@ const ShopItem = (props) => {
   )
 }
 
-export default ShopItem
+export default React.memo(ShopItem)

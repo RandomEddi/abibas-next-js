@@ -25,11 +25,12 @@ const Size = (props) => {
           background: white;
           border: 1px solid black;
           border-radius: 15px;
+          box-shadow: 0 0 5px rgba(0,0,0, .3);
           padding: 5px 10px;
-          box-shadow: 0 0 7px rgba(0,0,0, .3);
         }
         
         .size:disabled {
+          box-shadow: unset;
           opacity: .4;
           cursor: unset;
           background: gray;

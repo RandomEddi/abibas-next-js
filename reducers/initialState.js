@@ -7,7 +7,11 @@ const initialState = {
 
   shopList: {
     itemsList: [],
-    cartList: []
+  },
+  
+  cartList: {
+    cartItemsList: [],
+    amount: 0
   }
 }
 

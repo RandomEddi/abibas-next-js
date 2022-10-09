@@ -30,82 +30,9 @@ const Main = (props) => {
       dispatch(fetchAccounts())
 
     }
-    const test = [
-      {
-        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
-        price: 17999,
-        title: 'Мужские кроссовки adidas Originals Ozweego',
-        category: ['man', 'shoes'],
-        avaibleSize: ['39', '40', '41', '42'],
-        id: '1'
-      },
-      {
-        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
-        price: 17999,
-        title: 'Мужские кроссовки adidas Originals Ozweego',
-        category: ['man', 'shoes'],
-        avaibleSize: ['39', '40', '41', '42'],
-        id: '2'
-      },
-      {
-        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
-        price: 17999,
-        title: 'Мужские кроссовки adidas Originals Ozweego',
-        category: ['man', 'shoes'],
-        avaibleSize: ['39', '40', '41', '42'],
-        id: '3'
-      },
-      {
-        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
-        price: 17999,
-        title: 'Мужские кроссовки adidas Originals Ozweego',
-        category: ['man', 'shoes'],
-        avaibleSize: ['39', '40', '41', '42'],
-        id: '4'
-      },
-      {
-        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
-        price: 17999,
-        title: 'Мужские кроссовки adidas Originals Ozweego',
-        category: ['man', 'shoes'],
-        avaibleSize: ['39', '40', '41', '42'],
-        id: '5'
-      },
-      {
-        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
-        price: 17999,
-        title: 'Мужские кроссовки adidas Originals Ozweego',
-        category: ['woman', 'shoes'],
-        avaibleSize: ['39', '40', '41', '42'],
-        id: '6'
-      },
-      {
-        imgUrl: 'https://static.street-beat.ru/upload/iblock/0c6/0c6267f0dc8a52448cab2d81a1f3319e.jpg',
-        price: 17999,
-        title: 'Мужские кроссовки adidas Originals Ozweego',
-        category: ['woman', 'shoes'],
-        avaibleSize: ['39', '40', '41', '42'],
-        id: '7'
-      },
-      {
-        imgUrl: 'https://static.street-beat.ru/upload/resize_cache/iblock/034/500_500_1/0346fdafff73114de2016f9b0da2deee.jpg',
-        price: 14999,
-        title: 'Женские кроссовки adidas Originals Astir',
-        category: ['woman', 'shoes'],
-        avaibleSize: ['38', '41', '42'],
-        id: '8'
-      },
-      {
-        imgUrl: 'https://static.street-beat.ru/upload/resize_cache/iblock/bcb/500_500_1/bcb4256bf372825aaa1e5242bde7a8bf.jpg',
-        price: 10999,
-        title: 'Женская худи adidas Originals Graphic Hoodie',
-        category: ['woman'],
-        avaibleSize: ['38', '41', '42'],
-        id: '9'
-      },
-    ]
     
-    dispatch(setShopItems(test))
+    
+    dispatch(setShopItems())
   }, [])
 
   useEffect(

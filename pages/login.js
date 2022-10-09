@@ -47,7 +47,7 @@ const Login = () => {
             <label htmlFor='email'>Email Address</label>
             <Field id='email' name='email' type='email' placeholder='Email' />
             {formIsValid &&<label htmlFor='password'>Password</label>}
-            {!formIsValid &&<label className='invalid' htmlFor='password'>Password or Email Addres wrong</label>}
+            {!formIsValid &&<label className='invalid' htmlFor='password'>Password or Email Addres is wrong</label>}
             <Field
               id='password'
               name='password'

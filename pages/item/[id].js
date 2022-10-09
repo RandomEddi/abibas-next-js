@@ -4,33 +4,111 @@ import { useSelector } from 'react-redux'
 import Head from 'next/head'
 import Size from '../../components/ui/Size'
 import Main from '../../components/header/Main'
+import { useDispatch } from 'react-redux'
+import { addItemToCart } from '../../actions/cartListAction'
 
 const ItemPage = () => {
+  const isAuthorized = useSelector(state => state.accounts.authorized)
   const [selectedSize, setSelectedSize] = useState(null)
-  const router = useRouter()
-  const id = router.query.id
   const items = useSelector((state) => state.shopList.itemsList)
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const id = router.query.id
+  let btnIsDisabled
   let sizes = []
   const item = items.find((i) => i.id === id)
+  if (item === undefined) {
+    return (
+      <>
+        <div className='error'>
+          <p>Something went wrong.</p>
+          <button onClick={() => router.push('/')}>Go back to the main page.</button>
+        </div>
+        <style jsx>{`
+          .error {
+            padding: 0 10px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+          }
+
+          .error p {
+            font-weight: bold;
+            font-size: 30px;
+
+          }
+          .error button {
+            max-width: 300px;
+            cursor: pointer;
+            color: white;
+            background: black;
+            margin-top: 35px;
+            border-radius: 20px;
+            padding: 20px 30px;
+            font-weight: bold;
+            font-size: 23px;
+          }
+        `}</style>
+      </>)
+  }
+  
   const selectSizeHandler = useCallback((size) => {
     setSelectedSize(size)
   }, [])
 
-  for (let i = 38; i <= 45; i++) {
-    let disabled = !item.avaibleSize.includes(i.toString())
-    let isSelected = selectedSize === i
-    sizes.push(
-      <Size
-        key={i}
-        onSelect={selectSizeHandler}
-        selectedSize={isSelected}
-        disabled={disabled}
-      >
-        {i}
-      </Size>
-    )
+  if (item.category.includes('shoes')) {
+    for (let i = 38; i <= 45; i++) {
+      let disabled = !item.avaibleSize.includes(i.toString())
+      let isSelected = selectedSize === i
+      sizes.push(
+        <Size
+          key={i}
+          onSelect={selectSizeHandler}
+          selectedSize={isSelected}
+          disabled={disabled}
+        >
+          {i}
+        </Size>
+      )
+    }
+  } else {
+    for (let i of ['xs', 'sm', 'md', 'lg', 'xl']) {
+      let disabled = !item.avaibleSize.includes(i.toString())
+      let isSelected = selectedSize === i
+      sizes.push(
+        <Size
+          key={i}
+          onSelect={selectSizeHandler}
+          selectedSize={isSelected}
+          disabled={disabled}
+        >
+          {i}
+        </Size>
+      )
+    }
+
   }
 
+  const addToCartHandler = () => {
+    let itemForCart = {
+      price: item.price,
+      title: item.title,
+      size: selectedSize,
+      id: item.id
+    }
+    dispatch(addItemToCart(itemForCart))
+  }
+
+  if (isAuthorized && selectedSize !== null) {
+    btnIsDisabled = false
+  }
+  if (selectedSize === null || !isAuthorized) {
+    btnIsDisabled = true
+  }
+  
   return (
     <>
       <Main>
@@ -42,6 +120,7 @@ const ItemPage = () => {
             <h2 className='current-title'>{item.title}</h2>
             <span className='current-price'>{item.price} rub</span>
             <div className='current-sizes'>{sizes}</div>
+            {!isAuthorized && <p className='auth'>You must be authorized!</p>}
             <div className='btns'>
               <button
                 className='current-btn back-btn'
@@ -49,7 +128,7 @@ const ItemPage = () => {
               >
                 BACK
               </button>
-              <button className='current-btn' disabled={!selectedSize}>
+              <button onClick={addToCartHandler} className='current-btn' disabled={btnIsDisabled}>
                 Add To Cart
               </button>
             </div>
@@ -61,9 +140,16 @@ const ItemPage = () => {
       </Head>
       <style jsx>
         {`
+          .auth {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 20px;
+            color: red;
+          }
+
           .btns {
             display: flex;
-            margin-top: 40px;
+            margin-top: 30px;
             justify-content: space-between;
           }
 
