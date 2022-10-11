@@ -1,7 +1,8 @@
 import Link from "next/link";
 import styles from '../../styles/A.module.css'
+import React from "react";
 
-export default function A({children, href}) {
+function A({children, href}) {
     return (
         <>
             <Link href={href}>
@@ -10,3 +11,4 @@ export default function A({children, href}) {
         </>
     )
 }
+export default React.memo(A)

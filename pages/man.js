@@ -9,7 +9,7 @@ export default function Men() {
   const shopItems = useSelector(state => state.shopList.itemsList)
   const router = useRouter()
   const type = router.pathname.replace(/\//gi, '')
-  const pageItems = shopItems.filter(a => a.category.includes(type))
+  const pageItems = shopItems.filter(a => a.category.includes(type)).sort((i, j) => {return i.category.includes('shoes') - j.category.includes('shoes')})
   return (
     <>
       <Head>

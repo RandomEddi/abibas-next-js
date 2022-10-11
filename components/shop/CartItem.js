@@ -6,23 +6,23 @@ import { deleteFromCart } from '../../actions/cartListAction'
 
 const CartItem = (props) => {
   const dispatch = useDispatch()
-
+  const { title, id, size, price, quantity } = props
   const onAddItemHandler = () => {
     dispatch(addItemToCart({
-      title: props.title,
-      id: props.id,
-      size: props.size,
-      price: props.price
+      title: title,
+      id: id,
+      size: size,
+      price: price
     }))
   }
 
   const onRemoveItemHandler = () => {
     dispatch(deleteFromCart({
-      title: props.title,
-      id: props.id,
-      size: props.size,
-      price: props.price,
-      quantity: props.quantity,
+      title: title,
+      id: id,
+      size: size,
+      price: price,
+      quantity: quantity,
     }))
   }
   
@@ -30,13 +30,13 @@ const CartItem = (props) => {
     <>
       <div className='cart-item'>
         <div className='cart-info'>
-          <Link href={`/item/${props.id}`}><a className='cart-title'>{props.title}</a></Link>
-          <span className='cart-size'>SIZE: {props.size}</span>
+          <Link href={`/item/${id}`}><a className='cart-title'>{title}</a></Link>
+          <span className='cart-size'>SIZE: {size}</span>
         </div>
-        <span className='cart-price'>{props.price} rub</span>
+        <span className='cart-price'>{price} rub</span>
         <div className='cart-quantity'>
           <button onClick={onRemoveItemHandler}>-</button>
-          <span>{props.quantity}</span>
+          <span>{quantity}</span>
           <button onClick={onAddItemHandler}>+</button>
         </div>
       </div>

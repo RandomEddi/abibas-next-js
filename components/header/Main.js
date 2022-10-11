@@ -2,7 +2,7 @@ import A from '../ui/A'
 import Link from 'next/link'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import styles from '../../styles/A.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { logoutAccount, loginAccount } from '../../actions/accountsAction'
@@ -13,6 +13,8 @@ const Main = (props) => {
   const router = useRouter()
   const dispatch = useDispatch()
   const accountInfo = useSelector((state) => state.accounts)
+  const shopListItems = useSelector((state) => state.shopList.itemsList)
+
   const accountList = accountInfo.accountsList
   function getCookie(name) {
     let matches = document.cookie.match(
@@ -30,9 +32,9 @@ const Main = (props) => {
       dispatch(fetchAccounts())
 
     }
-    
-    
-    dispatch(setShopItems())
+    if (!shopListItems.length) {
+      dispatch(setShopItems())
+    }
   }, [])
 
   useEffect(
@@ -283,4 +285,4 @@ const Main = (props) => {
   )
 }
 
-export default Main
+export default React.memo(Main)

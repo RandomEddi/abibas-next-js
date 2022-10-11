@@ -5,7 +5,7 @@ import Container from '../components/ui/Container'
 import ShopItem from '../components/shop/ShopItem'
 
 export default function Home() {
-  const shopItems = useSelector(state => state.shopList.itemsList)
+  const shopItems = useSelector(state => state.shopList.itemsList).sort((i, j) => {return i.category.includes('shoes') - j.category.includes('shoes')})
   return (
     <>
       <Head>

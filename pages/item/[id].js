@@ -256,7 +256,7 @@ const ItemPage = () => {
               height: 250px;
             }
             .btns {
-              flex-direction: column;
+              flex-direction: column-reverse;
               row-gap: 15px;
             }
           }
