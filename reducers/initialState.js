@@ -12,7 +12,13 @@ const initialState = {
   cartList: {
     cartItemsList: [],
     amount: 0
+  },
+
+  ui: {
+    itemsLoading: false,
+    regLoading: false
   }
+
 }
 
 export default initialState

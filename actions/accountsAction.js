@@ -1,11 +1,13 @@
 import { NEW_ACCOUNT, SET_ACCOUNTS, LOGOUT, LOGIN } from '../reducers/accountsReducer'
 import axios from 'axios'
+import { setRegLoading, unsetRegLoading} from './loadingAction'
 
 const FIREBASE_URL = 'https://abibas-5f3cd-default-rtdb.firebaseio.com/accounts'
 
 export const addAccount = (accountData) => {
   return (dispatch) => {
     try {
+      dispatch(setRegLoading())
       axios.post(FIREBASE_URL + '.json', { email:accountData.email, password:accountData.password })
       .then((response) => {
         document.cookie = `user=${response.data.name}; max-age=604800`
@@ -14,6 +16,7 @@ export const addAccount = (accountData) => {
             password:accountData.password,
             id:response.data.name
         }
+        dispatch(unsetRegLoading())
         dispatch({ type: NEW_ACCOUNT, payload: dataObj })
       })
     } catch (e) {

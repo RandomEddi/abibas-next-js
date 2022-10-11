@@ -30,8 +30,8 @@ const Main = (props) => {
   useEffect(() => {
     if (!accountList.length) {
       dispatch(fetchAccounts())
-
     }
+
     if (!shopListItems.length) {
       dispatch(setShopItems())
     }

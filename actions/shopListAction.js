@@ -1,10 +1,12 @@
 import { SET_SHOP_ITEMS} from '../reducers/shopListReducer'
 import axios from 'axios'
+import { setItemsLoading, unsetItemsLoading} from './loadingAction'
 
 const FIREBASE_URL = 'https://abibas-5f3cd-default-rtdb.firebaseio.com/shopItems'
 
-export const setShopItems = () => async dispath => {
+export const setShopItems = () => async dispatch => {
   try {
+    dispatch(setItemsLoading())
     const response = await axios.get(FIREBASE_URL + '.json')
     const data = response.data
     if (!data) return
@@ -19,8 +21,9 @@ export const setShopItems = () => async dispath => {
         id: acc,
       })
     }
+    dispatch(unsetItemsLoading())
 
-    dispath({
+    dispatch({
       type: SET_SHOP_ITEMS,
       payload: itemsArray,
     })

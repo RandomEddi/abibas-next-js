@@ -12,9 +12,8 @@ const Login = () => {
   const [formIsValid, setFormIsValid] = useState(true)
   const router = useRouter()
   const dispatch = useDispatch()
-  
-
   const accounts = useSelector((state) => state.accounts.accountsList)
+  
   return (
     <>
       <Head>

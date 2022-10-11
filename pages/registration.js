@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { addAccount } from '../actions/accountsAction'
+import Loading from '../components/ui/Loading'
 
 const registration = () => {
   const [passwordIsValid,setPasswordIsValid] = useState(true)
@@ -13,6 +14,7 @@ const registration = () => {
   const router = useRouter()
   const dispatch = useDispatch()
   const accountsList = useSelector(state => state.accounts.accountsList)
+  const isLoading = useSelector(state => state.loading.regLoading)
 
   const focusHandler = () => {
     setPasswordIsValid(true)
@@ -42,7 +44,6 @@ const registration = () => {
               dispatch(addAccount(values))
               document.cookie = `user=${values.email}`
               setPasswordIsValid(true)
-              // localStorage.setItem('loggin', values.email)
               router.push('/')
               resetForm()
             } else {
@@ -75,7 +76,8 @@ const registration = () => {
               type="password"
               placeholder="Repeat your password"
               />
-            <button className={styles.loginBtn} type="submit">Register</button>
+            {!isLoading && <button className={styles.loginBtn} type="submit">Register</button>}
+            {isLoading && <Loading id="2"/>}
           </Form>
         </Formik>
     </Main>
